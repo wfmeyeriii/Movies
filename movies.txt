@@ -1,1 +1,2 @@
 Title	Release_Year	Genre	Rating	Length	Notes
+The_Witches	2020	Family/Horror	PG	1:46	Anne_Hathaway,_Octavia_Spencer,_Kristen_Chenoweth,_Chris_Rock
