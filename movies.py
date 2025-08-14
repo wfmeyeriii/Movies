@@ -295,13 +295,12 @@ def random_select(file):
     #randomly selects a movie from movies.txt, prints the info, offers to select a different one
     info = read_info(file)
     movie = random.choice(info)
-
-    print(f"""
-The randomly selected movie is:
-\t"{movie[0].replace("_"," ")}"
+    
+    print(f"\nThe randomly selected movie is:
+\t'{movie[0].replace("_"," ")}'
 \t{movie[1]}\t{movie[3]}\t{movie[2]}\t{movie[4]}
 \tNotes: {movie[5].replace("_"," ")}
-\nWould you like a different selection?""")
+\nWould you like a different selection?")
 
     choice = input("Y/N: ")
     if choice.upper() in ['Y','YES']:
@@ -346,4 +345,5 @@ To check the list: Enter 6
 To exit: Hit Enter\n""")
         choice = input("--> ")
     print("\nGoodbye!")
+
 
