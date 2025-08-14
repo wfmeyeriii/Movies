@@ -1,8 +1,6 @@
 import re
 import random
 
-# search for while True, replace pass or break with return
-
 def add_to_list(file,watched=None):
     #reads the file as a list of lists, gets new movies appended to the list of lists,
     #organizes by title or by date and rewrites the file
@@ -24,13 +22,15 @@ def add_to_list(file,watched=None):
     else:
         all_movies = info
         print("Some error here.")
+    write_file(file,all_movies,info[0])
+
+def write_file(file, all_movies, header):
     lines = []
     for movie in all_movies:
         line = '\t'.join(movie)
         lines.append(line+"\n")
     with open(file,"w") as file:
-        file.write('\t'.join(info[0])+"\n")
-        file.writelines(lines)
+        file.writelines(['\t'.join(header)] + lines)
 
 def get_movie(filename,info,title=None):
     #takes in the file contents as a list of lists (to check the new movie is not already in), asks for new entry info,
@@ -81,7 +81,7 @@ def get_movie(filename,info,title=None):
     genre = '/'.join(genres)
 
     print(f'{title} was successfully added!')
-    return [title.replace(' ','_'), release_year, genre, rating, length, notes.replace(' ','_')],"Y"
+    return [[title.replace(' ','_'), release_year, genre, rating, length, notes.replace(' ','_')]],"Y"
 
 def new_title(title):
     #takes in a string, returns my preferred Title format instead of using .title()
@@ -174,13 +174,7 @@ def mark_watched():
         watched_info = [watched.replace(" ","_"), date_watched, selected_movie[2], selected_movie[3], selected_movie[4], notes]
 
         movies.remove(selected_movie)
-        lines = []
-        for movie in movies:
-            line = '\t'.join(movie)
-            lines.append(line + "\n")
-        with open('movies.txt', "w") as file:
-            file.write('\t'.join(movie_info[0]) + "\n")
-            file.writelines(lines)
+        write_file('movies.txt',movies,movie_info[0])
     else:
         watched_info,go = get_movie("watched.txt",watched_info,watched)
     add_to_list("watched.txt",watched_info)
@@ -226,7 +220,7 @@ def by_date(list_of_lists,file):
 
     elif file == "watched.txt":
         # I have yet to test this
-        sort_the_dates(list_of_lists,0)
+        return sort_the_dates(list_of_lists,0)
 
 def sort_the_dates(lists,selection):
     # I have yet to test this
@@ -324,13 +318,7 @@ def check(file):
         all_movies = by_title(all_movies)
     elif file == "watched.txt":
         all_movies = by_date(all_movies,"watched.txt")
-    lines = []
-    for movie in all_movies:
-        line = '\t'.join(movie)
-        lines.append(line + "\n")
-    with open(file,"w") as file:
-        file.write('\t'.join(infos[0])+"\n")
-        file.writelines(lines)
+    write_file(file,all_movies,infos[0])
     print("Check successful!")
 
 if __name__ == "__main__":
@@ -358,3 +346,4 @@ To check the list: Enter 6
 To exit: Hit Enter\n""")
         choice = input("--> ")
     print("\nGoodbye!")
+
