@@ -1,1 +1,2 @@
 Title	Date_Watched	Genre	Rating	Length	Notes(release_year,_personal_rating,_etc.)
+A_Wrinkle_in_Time	2025-08-09	Family/Adventure	PG	2:00	2018_|_9.6/10_|_Oprah_Winfrey,_Reese_Witherspoon,_Mindy_Kaling,_Chris_Pine,_Gugu_Mbatha-Raw,_Rowan_Blanchard
