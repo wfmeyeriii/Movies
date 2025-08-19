@@ -30,7 +30,7 @@ def write_file(file, all_movies, header):
         line = '\t'.join(movie)
         lines.append(line+"\n")
     with open(file,"w") as file:
-        file.writelines(['\t'.join(header)] + lines)
+        file.writelines(['\t'.join(header)+'\n'] + lines)
 
 def get_movie(filename,info,title=None):
     #takes in the file contents as a list of lists (to check the new movie is not already in), asks for new entry info,
@@ -227,8 +227,8 @@ def sort_the_dates(lists,selection):
     if selection == 2:
         have_date = [lst for lst in lists if lst[1].strip().split('-')[2].isdigit()]
         no_date = [lst for lst in lists if not lst[1].strip().split('-')[2].isdigit()]
-        have_date = sorted(have_date, key=lambda x: int(x[1]))
-        return have_date + no_date
+        have_date = sorted(by_title(have_date), key=lambda x: int(x[1]))
+        return have_date + by_title(no_date)
     else:
         organized_movies = []
         timestamp = []
@@ -345,5 +345,6 @@ To check the list: Enter 6
 To exit: Hit Enter\n""")
         choice = input("--> ")
     print("\nGoodbye!")
+
 
 
